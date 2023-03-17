@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  burpsuite:
+    container_name: burpsuite
+    build: ./containers/burpsuite
+    restart: "no"
+    privileged: false
+    ports:
+      - "22:22" # X11 
+
+  reverse-proxy:
+    container_name: reverse-nginx
+    build: ./containers/nginx
+    ports:
+      - 80:80 # LISTEN ON HTTP
+    volumes:
+      - ./containers/nginx/nginx:/etc/nginx/ # NGINX CONFIGURATION
+
+# client ->
+  # (80) NGINX ->
+    # (443) BURPSUITE ->
+      # (443) target
