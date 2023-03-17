@@ -3,6 +3,12 @@ Using Docker-Compose, configures a reverse proxy (NGINX) to running through a Bu
 
 # Purpose
 
+Occasionally during application security assessments we find configuration pages that setup integrations with other applications. These integration points are sometimes vulnerable, and it is theoretically possible that the responses from these endpoints also have vulnerabilities.
+
+This tool was designed to help understand application integrations. It allows a tester to point redirect the integration to a device they control. This tool uses NGINX as a reverse proxy and tunnels all requests through the BurpSuite security tool. This provides a way tamper with the requests used by applications on the back channel in real time.
+
+![image](https://user-images.githubusercontent.com/17691342/226031238-ae71541c-6b45-4d1c-84e4-9b327970dce4.png)
+
 # SETUP
 
 ## 1) CONFIGURE NGINX
