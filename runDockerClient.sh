@@ -1,0 +1,1 @@
+ssh -o "StrictHostKeyChecking=no" -X -i id_rsa burpsuite@localhost "/bin/sh burpsuite.sh"
