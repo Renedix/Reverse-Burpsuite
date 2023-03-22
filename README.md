@@ -1,6 +1,9 @@
 # Reverse-Burpsuite
 Using Docker-Compose, configures a reverse proxy (NGINX) to running through a Burpsuite HTTP Listener. Allows remote users to connect to the Burpsuite Client using X11 over SSH using private key authentication.
 
+![image](https://user-images.githubusercontent.com/17691342/226913648-8e34c125-ad9a-446f-bca4-d93d66f95f3e.png)
+
+
 # PURPOSE
 
 Occasionally during application security assessments we find configuration pages that setup integrations with other applications. The ingress and egress of these configurable integrations are attack vectors that can be tested for vulnerabilities.
