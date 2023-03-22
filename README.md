@@ -19,9 +19,16 @@ This tool was designed to help understand application integrations and increase 
 
 # SETUP
 
+## 0) Download the Repository
+
+~~~
+git clone https://github.com/Renedix/Reverse-Burpsuite.git
+cd ./Reverse-Burpsuite
+~~~
+
 ## 1) CONFIGURE NGINX
-### Path: 
-```dir ./containers/nginx/nginx/config.d/```
+
+```cat ./containers/nginx/nginx/config.d/target.conf```
 
 WARNING: This image was only designed and tested with a single config file.
 
@@ -33,10 +40,10 @@ proxy_set_header Host
 proxy_set_header Referer
 
 ## 2) CONFIGURE BURPSUITE PUBLIC KEY AUTHENTICATION authorized_keys
-### Path: 
+
 
 ```
-dir ./containers/burpsuite/config/
+cat ./containers/burpsuite/config/authorized_keys
 ```
 
 SSH was enabled with public key authentication for the burpsuite user. This is used to connect to the BurpSuite client over X11. A key pair must be generated, with the public key placed in an authorized_keys file in the config director>
@@ -77,10 +84,9 @@ To run burpsuite over X11, from a debian system, run:
 ssh -o "StrictHostKeyChecking=no" -X -i id_rsa burpsuite@localhost "/bin/sh burpsuite.sh"
 ```
 
-localhost:
-        Replace with your host
-id_rsa:
-        Replace with your private key generated above
+localhost - Replace with your host
+
+id_rsa - Replace with your private key generated above
 
 ## 5) CONFIGURE PROXY
 
