@@ -1,13 +1,18 @@
 # Reverse-Burpsuite
 Using Docker-Compose, configures a reverse proxy (NGINX) to running through a Burpsuite HTTP Listener. Allows remote users to connect to the Burpsuite Client using X11 over SSH using private key authentication.
 
-# Purpose
+# PURPOSE
 
-Occasionally during application security assessments we find configuration pages that setup integrations with other applications. These integration points are sometimes vulnerable, and it is theoretically possible that the responses from these endpoints also have vulnerabilities.
+Occasionally during application security assessments we find configuration pages that setup integrations with other applications. The ingress and egress of these configurable integrations are attack vectors that can be tested for vulnerabilities.
 
-This tool was designed to help understand application integrations. It allows a tester to point redirect the integration to a device they control. This tool uses NGINX as a reverse proxy and tunnels all requests through the BurpSuite security tool. This provides a way tamper with the requests used by applications on the back channel in real time.
+This tool was designed to help understand application integrations and increase the testable attack vectors of an application. A tester can point an integration to a device they control. This tool uses NGINX as a reverse proxy and tunnels all requests through the BurpSuite security tool. This provides a way tamper with the requests used by applications on the back channel in real time.
 
 ![image](https://user-images.githubusercontent.com/17691342/226031238-ae71541c-6b45-4d1c-84e4-9b327970dce4.png)
+
+# REQUIREMENTS
+
+- docker compose
+- a debian based client (e.g., kali) to connect to the X11 service over SSH
 
 # SETUP
 
@@ -45,7 +50,19 @@ Place the public key to the config directory:
 cat id_rsa.pub > ./containers/burpsuite/config/authorized_keys
 ```
 
-## 3) CONNECT TO BURPSUITE
+## 3) Build and run
+
+Use docker compose to build the images
+~~~
+docker-compose build
+~~~
+
+Use docker compose to run the containers
+~~~
+docker-compose up
+~~~
+
+## 4) CONNECT TO BURPSUITE
 
 WARNING: This was only tested using the debian based system Kali.
 
@@ -62,7 +79,7 @@ localhost:
 id_rsa:
         Replace with your private key generated above
 
-## 4) CONFIGURE PROXY
+## 5) CONFIGURE PROXY
 
 Burpsuite needs to be configured as an invisible HTTP proxy. To do this, you need to edit the OPTIONS tab of Proxy tab.
 
@@ -89,7 +106,7 @@ enable "Support invisible proxying"
 ![image](https://user-images.githubusercontent.com/17691342/226024747-54c57866-2785-48ff-aa33-2122ce3e0bba.png)
 
 
-## 5) TEST
+## 6) TEST
 
 ### Request
 
